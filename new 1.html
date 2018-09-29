@@ -1,0 +1,50 @@
+<div id="countup">
+  Vikipedi
+  <p id="years">00</p>
+  <p class="timeRefYears">yıl</p>
+  <p id="days">00</p>
+  <p class="timeRefDays">gün</p>
+  <p id="hours">00</p>
+  <p class="timeRefHours">saat</p>
+  <p id="minutes">00</p>
+  <p class="timeRefMinutes">dakika</p>
+  <p id="seconds">00</p>
+  <p class="timeRefSeconds">saniyedir</p>
+  yasaklı.
+</div>
+window.onload=function() {
+  // Month,Day,Year,Hour,Minute,Second
+  upTime('jan,01,2014,00:00:00'); // ****** Change this line!
+}
+function upTime(countTo) {
+  now = new Date();
+  countTo = new Date(countTo);
+  difference = (now-countTo);
+
+  days=Math.floor(difference/(60*60*1000*24)*1);
+  hours=Math.floor((difference%(60*60*1000*24))/(60*60*1000)*1);
+  mins=Math.floor(((difference%(60*60*1000*24))%(60*60*1000))/(60*1000)*1);
+  secs=Math.floor((((difference%(60*60*1000*24))%(60*60*1000))%(60*1000))/1000*1);
+
+  document.getElementById('days').firstChild.nodeValue = days;
+  document.getElementById('hours').firstChild.nodeValue = hours;
+  document.getElementById('minutes').firstChild.nodeValue = mins;
+  document.getElementById('seconds').firstChild.nodeValue = secs;
+
+  clearTimeout(upTime.to);
+  upTime.to=setTimeout(function(){ upTime(countTo); },1000);
+}
+<style>
+#countup {
+    text-align: center;
+}
+#countup p {
+    display: inline-block;
+    padding: 10px;
+    background: #151515;
+    margin: 0 0 20px;
+    border-radius: 3px;
+    color: white;
+    min-width: 2.6rem;
+}
+</style>
